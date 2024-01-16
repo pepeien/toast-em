@@ -64,6 +64,10 @@ set_property(
 
 find_package(Vulkan REQUIRED)
 
+if (NOT Vulkan_FOUND)
+    message(FATAL_ERROR "Vulkan not found")
+endif()
+
 target_include_directories(
     ${TARGET_NAME}
     PRIVATE
