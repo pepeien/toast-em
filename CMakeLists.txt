@@ -12,9 +12,12 @@ project(${NAME} VERSION 1.0.0)
 
 ##############  Set Values  #######################
 set(TARGET_NAME "${NAME}")
-set(SOURCES_DIR "Source")
+set(SOURCES_DIR "${PROJECT_SOURCE_DIR}/Source")
+set(BUILD_DIR   "${CMAKE_SOURCE_DIR}/Bin")
 
-set(BUILD_DIR "${CMAKE_SOURCE_DIR}/build/Deploy")
+set(CONTENT_TARGET_NAME "Content")
+set(CONTENT_SOURCE_DIR  "${PROJECT_SOURCE_DIR}/Content")
+set(CONTENT_BUILD_DIR   "${BUILD_DIR}/Content")
 
 ##############  Set Source Files  #######################
 file(
@@ -140,3 +143,5 @@ elseif(UNIX)
     message(STATUS "CREATING BUILD FOR UNIX")
 
 endif()
+
+add_subdirectory(Content)

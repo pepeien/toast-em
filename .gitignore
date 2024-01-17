@@ -3,8 +3,7 @@
 
 # Build results
 [Bb]uild/
-vulkan/
-__pycache__/
+[Bb]in/
 
 # Microsoft Fakes
 .vs/
