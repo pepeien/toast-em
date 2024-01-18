@@ -7,7 +7,7 @@ file(
     GLOB_RECURSE
     SOURCES
 
-    "${SOURCES_DIR}/*.pak"
+    "${SOURCES_DIR}/*.kerb"
 )
 
 ##############  Copy files  #######################
