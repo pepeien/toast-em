@@ -4,12 +4,14 @@ int main(int argc, char *argv[])
 {
     try
     {
+        std::unique_ptr<Engine::Level> level = std::make_unique<Engine::Level>();
+        level->setSkybox(Engine::Kerb::read("./Content/Textures/Skybox/Sunset"));
+    
         std::unique_ptr<Engine::Actor> floor = std::make_unique<Engine::Actor>();
         floor->setAbsoluteTranslation(glm::vec3(0.0f, 0.0f, 0.0f));
-        floor->setAbsoluteScale(glm::vec3(0.1f, 0.1f, 0.1f));
-        floor->setMesh("./Content/Meshes/Air_Craft.kerb");
+        floor->setAbsoluteScale(glm::vec3(0.5f, 0.5f, 0.5f));
+        floor->setMesh(Engine::Kerb::read("./Content/Meshes/Apple"));
 
-        std::unique_ptr<Engine::Level> level = std::make_unique<Engine::Level>();
         level->addActor(floor.get());
 
         Engine::WindowCreateInfo windowCreateInfo = {};
