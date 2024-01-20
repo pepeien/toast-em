@@ -83,6 +83,14 @@ target_include_directories(
     ${CHICANE_ENGINE_INCLUDE_DIR}/stb
 )
 
+target_link_libraries(
+    ${TARGET_NAME}
+    PRIVATE
+
+    # Engine
+    ${CHICANE_ENGINE_LIB_DIR}/Engine.a
+)
+
 if (WIN32)
     message(STATUS "CREATING BUILD FOR WINDOWS")
 
@@ -106,10 +114,7 @@ if (WIN32)
         ${TARGET_NAME}
         PRIVATE
 
-        # Source
-        ${SOURCES_DIR}
-
-        # Engine
+        # Engine Vendor
         ${Vulkan_INCLUDE_DIRS}
     )
 
@@ -117,6 +122,7 @@ if (WIN32)
         ${TARGET_NAME}
         PRIVATE
 
+        # Engine Vendor
         $ENV{VULKAN_SDK}/Lib
     )
 
@@ -124,6 +130,7 @@ if (WIN32)
         ${TARGET_NAME}
         PRIVATE
 
+        # Engine Vendor
         vulkan-1
         SDL2
     )
@@ -132,16 +139,23 @@ if (WIN32)
         ${TARGET_NAME}
         PRIVATE
 
-        # Engine
-        ${CHICANE_ENGINE_LIB_DIR}/Engine.a
-
-        # Vendor
+        # Engine Vendor
         vulkan-1
         SDL2
     )
 elseif(UNIX)
     message(STATUS "CREATING BUILD FOR UNIX")
 
+    find_package(SDL2 REQUIRED)
+
+    target_link_libraries(
+        ${TARGET_NAME}
+        PRIVATE
+
+        # Vendor
+        vulkan
+        SDL2::SDL2
+    )
 endif()
 
 add_subdirectory(Content)
