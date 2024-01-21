@@ -8,14 +8,16 @@ int main(int argc, char *argv[])
 
         Engine::Kerb::Instance skybox = Engine::Kerb::read("./Content/Textures/Skybox/Sunset");
 
-        std::unique_ptr<Engine::Actor> floor = std::make_unique<Engine::Actor>();
-        floor->setAbsoluteTranslation(glm::vec3(0.0f, 0.0f, 0.0f));
-        floor->setAbsoluteScale(glm::vec3(0.5f, 0.5f, 0.5f));
-        floor->setMesh(Engine::Kerb::read("./Content/Meshes/Apple"));
+        std::unique_ptr<Character> character = std::make_unique<Character>();
+        character->setRelativeTranslation(glm::vec3(0.0f));
+        character->setRelativeScale(glm::vec3(25.0f));
+        character->setMesh(Engine::Kerb::read("./Content/Meshes/Cube"));
+
+        controller->possess(character.get());
 
         std::unique_ptr<Engine::Level> level = std::make_unique<Engine::Level>();
         level->setSkybox(skybox);
-        level->addActor(floor.get());
+        level->addActor(character.get());
 
         Engine::WindowCreateInfo windowCreateInfo = {};
         windowCreateInfo.title             = "Toast' Em";
