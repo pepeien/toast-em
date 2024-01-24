@@ -2,9 +2,9 @@
 
 constexpr float MOVE_STEP = 0.5f;
 
-void Character::getPossesedBy(Engine::Controller* inController)
+void Character::getPossesedBy(Chicane::Controller* inController)
 {
-    Engine::Pawn::getPossesedBy(inController);
+    Chicane::Pawn::getPossesedBy(inController);
 
     // Movement
     m_controller->bindEvent(

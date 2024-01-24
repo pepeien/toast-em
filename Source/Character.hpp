@@ -1,11 +1,12 @@
 #pragma once
 
 #include "Core.hpp"
+#include "Game.hpp"
 
-class Character : public Engine::Pawn
+class Character : public Chicane::Pawn
 {
 public:
-    void getPossesedBy(Engine::Controller* inController) override;
+    void getPossesedBy(Chicane::Controller* inController) override;
 
 private:
     void onMoveFrontBack(bool isMovingForwards);

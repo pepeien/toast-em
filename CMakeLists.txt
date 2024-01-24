@@ -79,8 +79,16 @@ target_include_directories(
     ${SOURCES_DIR}
 
     # Engine
-    ${CHICANE_ENGINE_SOURCE_DIR}
-    ${CHICANE_ENGINE_INCLUDE_DIR}/stb
+    ${CHICANE_SOURCE_DIR}/Runtime
+    ${CHICANE_SOURCE_DIR}/Vendor
+)
+
+target_link_directories(   
+    ${TARGET_NAME}
+    PRIVATE
+
+    # Engine
+    ${CHICANE_LIB_DIR}
 )
 
 target_link_libraries(
@@ -88,7 +96,7 @@ target_link_libraries(
     PRIVATE
 
     # Engine
-    ${CHICANE_ENGINE_LIB_DIR}/Engine.a
+    Runtime
 )
 
 if (WIN32)
