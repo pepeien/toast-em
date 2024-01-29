@@ -30,13 +30,6 @@ namespace UI
         ImGui_ImplSDL2_InitForVulkan(m_window->instance);
     }
 
-    Layer::~Layer()
-    {
-        ImGui_ImplVulkan_Shutdown();
-        ImGui_ImplSDL2_Shutdown();
-        ImGui::DestroyContext();
-    }
-
     void Layer::init()
     {
         initDescriptorPool();
@@ -56,7 +49,7 @@ namespace UI
         ImGui_ImplSDL2_NewFrame(m_window->instance);
         ImGui::NewFrame();
 
-        parseUI("./Content/UI/Menu/Gameplay.xml");
+        parseUI("./Content/UI/HUD/Gameplay.xml");
 
     	ImGui::Render();
     }
@@ -102,6 +95,11 @@ namespace UI
     void Layer::destroy()
     {
         m_renderer->m_logicalDevice.waitIdle();
+
+        ImGui_ImplVulkan_Shutdown();
+        ImGui_ImplSDL2_Shutdown();
+        ImGui::DestroyContext();
+
         m_renderer->m_logicalDevice.destroyRenderPass(m_renderPass);
         m_renderer->m_logicalDevice.destroyDescriptorPool(m_descriptorPool);
     }
