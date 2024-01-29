@@ -20,10 +20,10 @@ int main(int argc, char *argv[])
         level->addActor(character.get());
 
         Chicane::WindowCreateInfo windowCreateInfo = {};
-        windowCreateInfo.title             = "Toast' Em";
-        windowCreateInfo.resolution.width  = 1600;
-        windowCreateInfo.resolution.height = 900;
-        windowCreateInfo.displayIndex      = 1;
+        windowCreateInfo.title         = "Toast' Em";
+        windowCreateInfo.resolution.x  = 1600;
+        windowCreateInfo.resolution.y  = 900;
+        windowCreateInfo.displayIndex  = 1;
 
         std::unique_ptr<Chicane::Window> window = std::make_unique<Chicane::Window>(
             windowCreateInfo,

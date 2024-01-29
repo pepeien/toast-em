@@ -4,7 +4,7 @@
 
 namespace UI
 {
-    namespace Text
+    namespace TextComponent
     {
         const std::string TAG_ID = "Text";
 

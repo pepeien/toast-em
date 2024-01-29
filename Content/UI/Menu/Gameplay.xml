@@ -1,0 +1,5 @@
+<View id="gameplay-hud" title="Gameplay HUD">
+    <Text>Health</Text>
+    <Button onClick="onFirstButtonClick">First Button</Button>
+    <Button onClick="onSecondButtonClick">Second Button</Button>
+</View>

@@ -1,5 +1,7 @@
 #include "Layer.hpp"
 
+#include "Components/View.hpp"
+
 namespace UI
 {
     Layer::Layer(Chicane::Window* inWindow)
@@ -54,7 +56,7 @@ namespace UI
         ImGui_ImplSDL2_NewFrame(m_window->instance);
         ImGui::NewFrame();
 
-        parseUI("./Content/UI/Hud.xml");
+        parseUI("./Content/UI/Menu/Gameplay.xml");
 
     	ImGui::Render();
     }
@@ -199,23 +201,10 @@ namespace UI
             throw std::runtime_error("UI document " + inFilepath + " does not have any components");
         }
 
-        pugi::xml_node rootElement = doc.first_child();
-
-        bool isRoot  = rootElement.parent() == rootElement.root();
-        bool isAlone = isRoot && rootElement.next_sibling() == nullptr;
-
-        if (!isRoot || !isAlone)
-        {
-            throw std::runtime_error("UI document root element must not have any siblings");
-        }
-
-        if (View::TAG_ID.compare(rootElement.name()) != 0)
-        {
-            throw std::runtime_error("UI document root element must be a " + View::TAG_ID);
-        }
-
-        ImGui::Begin(rootElement.attribute("title").as_string());
-            View::compile(rootElement);
-        ImGui::End();
+        ViewComponent::compile(
+            doc.first_child(),
+            m_window->getResolution(),
+            m_window->getPosition()
+        );
     }
 }

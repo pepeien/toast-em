@@ -2,7 +2,7 @@
 
 namespace UI
 {
-    namespace Text
+    namespace TextComponent
     {
         void compile(const pugi::xml_node& inNode)
         {

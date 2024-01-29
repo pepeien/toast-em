@@ -2,8 +2,6 @@
 
 #include "UI/Base.hpp"
 
-#include "Components/View.hpp"
-
 #include "Runtime/Core.hpp"
 #include "Runtime/Renderer/Frame.hpp"
 
