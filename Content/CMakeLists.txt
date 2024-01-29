@@ -8,6 +8,7 @@ file(
     SOURCES
 
     "${SOURCES_DIR}/*.kerb"
+    "${SOURCES_DIR}/*.xml"
 )
 
 ##############  Copy files  #######################

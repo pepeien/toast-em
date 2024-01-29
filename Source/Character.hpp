@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Core.hpp"
-#include "Game.hpp"
+#include "Runtime/Core.hpp"
+#include "Runtime/Game.hpp"
 
 class Character : public Chicane::Pawn
 {

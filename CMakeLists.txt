@@ -19,6 +19,8 @@ set(CONTENT_TARGET_NAME "Content")
 set(CONTENT_SOURCE_DIR  "${PROJECT_SOURCE_DIR}/Content")
 set(CONTENT_BUILD_DIR   "${BUILD_DIR}/Content")
 
+set(VENDOR_SOURCE_DIR "${PROJECT_SOURCE_DIR}/Vendor")
+
 ##############  Set Source Files  #######################
 file(
     GLOB_RECURSE
@@ -26,6 +28,14 @@ file(
 
     # Source
     ${SOURCES_DIR}/**.cpp
+
+    # Vendor
+    ${VENDOR_SOURCE_DIR}/imgui/imgui_draw.cpp
+    ${VENDOR_SOURCE_DIR}/imgui/imgui_tables.cpp
+    ${VENDOR_SOURCE_DIR}/imgui/imgui_widgets.cpp
+    ${VENDOR_SOURCE_DIR}/imgui/imgui.cpp
+    ${VENDOR_SOURCE_DIR}/imgui/backends/imgui_impl_sdl2.cpp
+    ${VENDOR_SOURCE_DIR}/imgui/backends/imgui_impl_vulkan.cpp
 )
 
 add_executable(${TARGET_NAME} ${SOURCES})
@@ -78,7 +88,13 @@ target_include_directories(
     # Source
     ${SOURCES_DIR}
 
+    # Vendor
+    ${VENDOR_SOURCE_DIR}
+    ${VENDOR_SOURCE_DIR}/imgui
+    ${VENDOR_SOURCE_DIR}/pugixml/src
+
     # Engine
+    ${CHICANE_SOURCE_DIR}
     ${CHICANE_SOURCE_DIR}/Runtime
     ${CHICANE_SOURCE_DIR}/Vendor
 )
@@ -87,6 +103,9 @@ target_link_directories(
     ${TARGET_NAME}
     PRIVATE
 
+    # Vendor
+    ${VENDOR_SOURCE_DIR}/pugixml/build
+
     # Engine
     ${CHICANE_LIB_DIR}
 )
@@ -94,6 +113,9 @@ target_link_directories(
 target_link_libraries(
     ${TARGET_NAME}
     PRIVATE
+
+    # Vendor
+    pugixml
 
     # Engine
     Runtime
@@ -124,6 +146,7 @@ if (WIN32)
 
         # Engine Vendor
         ${Vulkan_INCLUDE_DIRS}
+        ${Vulkan_INCLUDE_DIRS}/SDL2
     )
 
     target_link_directories(
@@ -132,15 +155,6 @@ if (WIN32)
 
         # Engine Vendor
         $ENV{VULKAN_SDK}/Lib
-    )
-
-    target_link_directories(
-        ${TARGET_NAME}
-        PRIVATE
-
-        # Engine Vendor
-        vulkan-1
-        SDL2
     )
 
     target_link_libraries(

@@ -23,12 +23,14 @@ int main(int argc, char *argv[])
         windowCreateInfo.title             = "Toast' Em";
         windowCreateInfo.resolution.width  = 1600;
         windowCreateInfo.resolution.height = 900;
+        windowCreateInfo.displayIndex      = 1;
 
         std::unique_ptr<Chicane::Window> window = std::make_unique<Chicane::Window>(
             windowCreateInfo,
-            level.get(),
-            controller.get()
+            controller.get(),
+            level.get()
         );
+        window->addLayer(new UI::Layer(window.get()));
         window->run();
     }
     catch (const std::exception& e)
