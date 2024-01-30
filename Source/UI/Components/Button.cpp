@@ -24,7 +24,7 @@ namespace UI
 
             View activeView = getActiveView();
 
-            std::string callbackSignature = inNode.attribute(ON_CLICK_ATTRIBUTE_ID.c_str()).as_string();
+            std::string callbackSignature = inNode.attribute(ON_CLICK_ATTRIBUTE_NAME.c_str()).as_string();
 
             if (activeView.callbacks.find(callbackSignature) == activeView.callbacks.end())
             {

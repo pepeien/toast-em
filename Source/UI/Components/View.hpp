@@ -11,7 +11,6 @@ namespace UI
         const std::string TAG_ID = "View";
 
         void validate(const pugi::xml_node& inNode);
-        void compileChild(const pugi::xml_node& inNode);
         void compile(
             const pugi::xml_node& inNode,
             const Chicane::Vec2& inResolution,

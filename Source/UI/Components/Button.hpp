@@ -6,8 +6,10 @@ namespace UI
 {
     namespace ButtonComponent
     {
-        const std::string TAG_ID                = "Button";
-        const std::string ON_CLICK_ATTRIBUTE_ID = "onClick";
+        const std::string TAG_ID = "Button";
+
+        // Attributes
+        const std::string ON_CLICK_ATTRIBUTE_NAME = "onClick";
 
         void compile(const pugi::xml_node& inNode);
     }

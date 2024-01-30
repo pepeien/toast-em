@@ -16,9 +16,9 @@ namespace UI
                 throw std::runtime_error("UI document root element must not have any siblings");
             }
 
-            if (ViewComponent::TAG_ID.compare(inNode.name()) != 0)
+            if (TAG_ID.compare(inNode.name()) != 0)
             {
-                throw std::runtime_error("UI document root element must be a " + ViewComponent::TAG_ID);
+                throw std::runtime_error("UI document root element must be a " + TAG_ID);
             }
 
             std::string viewID = getID(inNode);
@@ -31,28 +31,6 @@ namespace UI
             if (Views.find(viewID) == Views.end())
             {
                 throw std::runtime_error("View ID " + viewID + " is not registered on the system");
-            }
-        }
-
-        void compileChild(const pugi::xml_node& inNode)
-        {
-            if (inNode.name() == nullptr)
-            {
-                return;
-            }
-
-            std::string tagName = std::string(inNode.name());
-
-            if (Components.find(tagName) == Components.end())
-            {
-                return;
-            }
-
-            Components.at(tagName)(inNode);
-
-            for (pugi::xml_node& child : inNode.children())
-            {
-                compileChild(child);
             }
         }
 
@@ -75,17 +53,14 @@ namespace UI
             setActiveView(activeView);
 
             ImGui::Begin(
-                inNode.attribute("title").as_string(),
+                getTitle(inNode).c_str(),
                 nullptr,
                 viewFlags
             );
                 ImGui::SetWindowSize(ImVec2(inResolution.x, inResolution.y));
                 ImGui::SetWindowPos(ImVec2(inPosition.x, inPosition.y));
 
-                for (pugi::xml_node& child : inNode.children())
-                {
-                    compileChild(child);
-                }
+                compileChildren(inNode);
             ImGui::End();
         }
     }
