@@ -21,7 +21,7 @@ namespace UI
                 throw std::runtime_error("UI document root element must be a " + TAG_ID);
             }
 
-            std::string viewID = getID(inNode);
+            std::string viewID = getAttribute(ID_ATTRIBUTE_NAME, inNode).as_string();
 
             if (viewID.empty())
             {
@@ -35,12 +35,12 @@ namespace UI
         }
 
         void compile(
-            const pugi::xml_node& inNode,
+            pugi::xml_node& outNode,
             const Chicane::Vec2& inResolution,
             const Chicane::Vec2& inPosition
         )
         {
-            validate(inNode);
+            validate(outNode);
 
             ImGuiWindowFlags viewFlags = ImGuiWindowFlags_NoNav |
                                          ImGuiWindowFlags_NoDecoration |
@@ -48,19 +48,19 @@ namespace UI
                                          ImGuiWindowFlags_NoBackground;
 
             View activeView = {};
-            activeView.callbacks = Views.at(getID(inNode));
+            activeView.callbacks = Views.at(getAttribute(ID_ATTRIBUTE_NAME, outNode).as_string());
 
             setActiveView(activeView);
 
             ImGui::Begin(
-                getTitle(inNode).c_str(),
+                getAttribute(TITLE_ATTRIBUTE_NAME ,outNode).as_string(),
                 nullptr,
                 viewFlags
             );
                 ImGui::SetWindowSize(ImVec2(inResolution.x, inResolution.y));
                 ImGui::SetWindowPos(ImVec2(inPosition.x, inPosition.y));
 
-                compileChildren(inNode);
+                compileChildren(outNode);
             ImGui::End();
         }
     }

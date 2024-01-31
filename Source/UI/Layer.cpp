@@ -199,8 +199,10 @@ namespace UI
             throw std::runtime_error("UI document " + inFilepath + " does not have any components");
         }
 
+        pugi::xml_node rootComponent = doc.first_child();
+
         ViewComponent::compile(
-            doc.first_child(),
+            rootComponent,
             m_window->getResolution(),
             m_window->getPosition()
         );

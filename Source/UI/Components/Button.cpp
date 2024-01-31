@@ -8,23 +8,23 @@ namespace UI
 {
     namespace ButtonComponent
     {
-        void compile(const pugi::xml_node& inNode)
+        void compile(pugi::xml_node& outNode)
         {
-            if (std::string(inNode.name()).compare(TAG_ID) != 0)
+            if (std::string(outNode.name()).compare(TAG_ID) != 0)
             {
                 return;
             }
 
-            if (inNode.children().empty())
+            if (outNode.children().empty())
             {
                 return;
             }
 
-            auto buttonText = inNode.child_value();
+            auto buttonText = outNode.child_value();
 
             View activeView = getActiveView();
 
-            std::string callbackSignature = inNode.attribute(ON_CLICK_ATTRIBUTE_NAME.c_str()).as_string();
+            std::string callbackSignature = getAttribute(ON_CLICK_ATTRIBUTE_NAME, outNode).as_string();
 
             if (activeView.callbacks.find(callbackSignature) == activeView.callbacks.end())
             {
@@ -35,7 +35,7 @@ namespace UI
 
             if (ImGui::Button(buttonText))
             {
-                activeView.callbacks.at(callbackSignature)(inNode);
+                activeView.callbacks.at(callbackSignature)(outNode);
             }
         }
     }

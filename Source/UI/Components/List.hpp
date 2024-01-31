@@ -9,8 +9,6 @@ namespace UI
         const std::string TAG_ID = "List";
 
         // Attributes
-        const std::string WIDTH_ATTRIBUTE_NAME     = "width";
-        const std::string HEIGHT_ATTRIBUTE_NAME    = "height";
         const std::string DIRECTION_ATTRIBUTE_NAME = "direction";
 
         // Direction
@@ -23,11 +21,9 @@ namespace UI
             Row
         };
 
-        int getWidth(const pugi::xml_node& inNode);
-        int getHeight(const pugi::xml_node& inNode);
         Direction getDirection(const pugi::xml_node& inNode);
 
         void validate(const pugi::xml_node& inNode);
-        void compile(const pugi::xml_node& inNode);
+        void compile(pugi::xml_node& outNode);
     }
 }

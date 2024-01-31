@@ -4,19 +4,9 @@ namespace UI
 {
     namespace ListComponent
     {
-        int getWidth(const pugi::xml_node& inNode)
-        {
-            return inNode.attribute(WIDTH_ATTRIBUTE_NAME.c_str()).as_int();
-        }
-
-        int getHeight(const pugi::xml_node& inNode)
-        {
-            return inNode.attribute(HEIGHT_ATTRIBUTE_NAME.c_str()).as_int();
-        }
-
         Direction getDirection(const pugi::xml_node& inNode)
         {
-            std::string rawDirection = inNode.attribute(DIRECTION_ATTRIBUTE_NAME.c_str()).as_string();
+            std::string rawDirection = getAttribute(DIRECTION_ATTRIBUTE_NAME, inNode).as_string();
 
             std::transform(
                 rawDirection.begin(),
@@ -40,7 +30,7 @@ namespace UI
                 throw std::runtime_error("Component is not a " + TAG_ID);
             }
 
-            std::string title = getTitle(inNode);
+            std::string title = getAttribute(TITLE_ATTRIBUTE_NAME, inNode).as_string();
 
             if (title.empty())
             {
@@ -48,26 +38,29 @@ namespace UI
             }
         }
 
-        void compile(const pugi::xml_node& inNode)
+        void compile(pugi::xml_node& outNode)
         {
-            validate(inNode);
+            validate(outNode);
 
-            Direction direction = getDirection(inNode);
+            Direction direction = getDirection(outNode);
 
             ImGui::BeginChild(
-                getTitle(inNode).c_str(),
-                ImVec2(getWidth(inNode), getHeight(inNode))
+                getAttribute(TITLE_ATTRIBUTE_NAME, outNode).as_string(),
+                ImVec2(
+                    getAttribute(WIDTH_ATTRIBUTE_NAME, outNode).as_float(),
+                    getAttribute(HEIGHT_ATTRIBUTE_NAME, outNode).as_float()
+                )
             );
-                if (!inNode.children().empty())
+                if (!outNode.children().empty())
                 {
-                    for (pugi::xml_node& child : inNode.children())
+                    for (pugi::xml_node& child : outNode.children())
                     {
                         if (direction == Direction::Row)
                         {
                             ImGui::SameLine();
                         }
 
-                        compileChildRecursive(child);
+                        compileChild(child);
                     }
                 }
             ImGui::EndChild();

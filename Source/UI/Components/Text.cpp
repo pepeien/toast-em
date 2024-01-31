@@ -4,19 +4,19 @@ namespace UI
 {
     namespace TextComponent
     {
-        void compile(const pugi::xml_node& inNode)
+        void compile(pugi::xml_node& outNode)
         {
-            if (std::string(inNode.name()).compare(TAG_ID) != 0)
+            if (std::string(outNode.name()).compare(TAG_ID) != 0)
             {
                 return;
             }
 
-            if (inNode.children().empty())
+            if (outNode.children().empty())
             {
                 return;
             }
 
-            ImGui::Text(inNode.child_value());
+            ImGui::Text(outNode.child_value());
         }
     }
 }

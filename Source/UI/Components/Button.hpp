@@ -11,6 +11,6 @@ namespace UI
         // Attributes
         const std::string ON_CLICK_ATTRIBUTE_NAME = "onClick";
 
-        void compile(const pugi::xml_node& inNode);
+        void compile(pugi::xml_node& outNode);
     }
 }

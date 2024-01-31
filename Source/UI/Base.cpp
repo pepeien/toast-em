@@ -11,14 +11,12 @@ namespace UI
         return inNode.name();
     }
 
-    std::string getID(const pugi::xml_node& inNode)
+    pugi::xml_attribute getAttribute(
+        const std::string& inName,
+        const pugi::xml_node& inNode
+    )
     {
-        return inNode.attribute(ID_ATTRIBUTE_NAME.c_str()).as_string();
-    }
-
-    std::string getTitle(const pugi::xml_node& inNode)
-    {
-        return inNode.attribute(TITLE_ATTRIBUTE_NAME.c_str()).as_string();
+        return inNode.attribute(inName.c_str());
     }
 
     View getActiveView()
@@ -31,51 +29,38 @@ namespace UI
         m_activeView = inView;
     }
 
-    void compileChildren(const pugi::xml_node& inNode)
+    void compileChildren(pugi::xml_node& outNode)
     {
-        for (pugi::xml_node& child : inNode.children())
+        for (pugi::xml_node& child : outNode.children())
         {
             compileChild(child);
         }
     }
 
-    void compileChildrenRecursive(const pugi::xml_node& inNode)
+    void compileChild(pugi::xml_node& outNode)
     {
-        for (pugi::xml_node& child : inNode.children())
-        {
-            compileChildRecursive(child);
-        }
-    }
-
-    void compileChild(const pugi::xml_node& inNode)
-    {
-        if (inNode.name() == nullptr)
+        if (outNode.name() == nullptr)
         {
             return;
         }
 
-        std::string tagName = std::string(inNode.name());
+        std::string tagName = std::string(outNode.name());
 
         if (Components.find(tagName) == Components.end())
         {
             return;
         }
 
-        Components.at(tagName)(inNode);
-    }
+        std::string onTickSignature = getAttribute(ON_TICK_ATTRIBUTE, outNode).as_string();
 
-    void compileChildRecursive(const pugi::xml_node& inNode)
-    {
-        compileChild(inNode);
-
-        if (getTag(inNode).compare(ListComponent::TAG_ID) == 0)
+        if (
+            !onTickSignature.empty() &&
+            m_activeView.callbacks.find(onTickSignature) != m_activeView.callbacks.end()
+        )
         {
-            return;
+            m_activeView.callbacks.at(onTickSignature)(outNode);
         }
 
-        for (pugi::xml_node& child : inNode.children())
-        {
-            compileChildRecursive(child);
-        }
+        Components.at(tagName)(outNode);
     }
 }

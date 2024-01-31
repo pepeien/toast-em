@@ -12,7 +12,7 @@ namespace UI
 
         void validate(const pugi::xml_node& inNode);
         void compile(
-            const pugi::xml_node& inNode,
+            pugi::xml_node& outNode,
             const Chicane::Vec2& inResolution,
             const Chicane::Vec2& inPosition
         );

@@ -13,30 +13,32 @@
 
 namespace UI
 {
-    typedef std::unordered_map<std::string, void (*)(const pugi::xml_node& inNode)> ComponentCallbackMap;
+    typedef std::unordered_map<std::string, void (*)(pugi::xml_node& outNode)> ComponentCallbackMap;
     typedef std::unordered_map<std::string, ComponentCallbackMap> ViewCallbackMap;
 
-    // Attributes
-    const std::string ID_ATTRIBUTE_NAME    = "id";
-    const std::string TITLE_ATTRIBUTE_NAME = "title";
+    // Value attributes
+    const std::string ID_ATTRIBUTE_NAME     = "id";
+    const std::string TITLE_ATTRIBUTE_NAME  = "title";
+    const std::string WIDTH_ATTRIBUTE_NAME  = "width";
+    const std::string HEIGHT_ATTRIBUTE_NAME = "height";
+
+    // Lifecycle attributes
+    const std::string ON_TICK_ATTRIBUTE = "onTick";
 
     struct View
     {
         ComponentCallbackMap callbacks;
     };
 
-    std::string getTag(const pugi::xml_node& inNode);
-
-    // Attributes
-    std::string getID(const pugi::xml_node& inNode);
-    std::string getTitle(const pugi::xml_node& inNode);
+    std::string getTag(const pugi::xml_node& outNode);
+    pugi::xml_attribute getAttribute(
+        const std::string& inName,
+        const pugi::xml_node& outNode
+    );
 
     View getActiveView();
     void setActiveView(const View& inView);
     
-    void compileChildren(const pugi::xml_node& inNode);
-    void compileChildrenRecursive(const pugi::xml_node& inNode);
-
-    void compileChild(const pugi::xml_node& inNode);
-    void compileChildRecursive(const pugi::xml_node& inNode);
+    void compileChildren(pugi::xml_node& outNode);
+    void compileChild(pugi::xml_node& outNode);
 }

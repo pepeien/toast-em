@@ -8,6 +8,6 @@ namespace UI
     {
         const std::string TAG_ID = "Text";
 
-        void compile(const pugi::xml_node& inNode);
+        void compile(pugi::xml_node& outNode);
     }
 }
