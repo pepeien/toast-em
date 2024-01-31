@@ -1,5 +1,12 @@
 <View id="gameplay-hud" title="Gameplay HUD">
-    <Text>Health</Text>
+    <List title="Health Bar" direction="row" height="100">
+        <Box width="100" height="100" />
+        <ProgressBar
+            width="100"
+            height="25"
+            onTick="onProgressBarTick"
+        />
+    </List>
     <List title="Button List" direction="row">
         <Button onClick="onFirstButtonClick">First Button</Button>
         <Button onClick="onSecondButtonClick">Second Button</Button>

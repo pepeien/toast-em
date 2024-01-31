@@ -8,12 +8,14 @@ namespace UI
     {
         const std::string VIEW_ID = "gameplay-hud";
 
-        void onFirstButtonClick(const pugi::xml_node& inNode);
-        void onSecondButtonClick(const pugi::xml_node& inNode);
+        void onFirstButtonClick(pugi::xml_node& outNode);
+        void onSecondButtonClick(pugi::xml_node& outNode);
+        void onProgressBarTick(pugi::xml_node& outNode);
 
         const ComponentCallbackMap Callbacks = {
             { "onFirstButtonClick", &onFirstButtonClick },
-            { "onSecondButtonClick", &onSecondButtonClick }
+            { "onSecondButtonClick", &onSecondButtonClick },
+            { "onProgressBarTick", &onProgressBarTick }
         };
     }
 }
