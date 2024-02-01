@@ -1,14 +1,24 @@
 <View id="gameplay-hud" title="Gameplay HUD">
-    <List title="Health Bar" direction="row" height="100">
-        <Box width="100" height="100" />
+    <Box width="100" height="100" />
+    <List title="Status" direction="column" height="65">
         <ProgressBar
-            width="100"
+            width="200"
             height="25"
-            onTick="onProgressBarTick"
-        />
+            percentage="100"
+            onTick="onHealthBarTick"
+        >
+            Health
+        </ProgressBar>
+        <ProgressBar
+            width="170"
+            height="25"
+            percentage="100"
+        >
+            Mana
+        </ProgressBar>
     </List>
     <List title="Button List" direction="row">
-        <Button onClick="onFirstButtonClick">First Button</Button>
-        <Button onClick="onSecondButtonClick">Second Button</Button>
+        <Button onClick="onTakeDamageButtonClick">Take Damage</Button>
+        <Button onClick="onHealButtonClick">Heal</Button>
     </List>
 </View>

@@ -9,36 +9,40 @@ namespace UI
         int percentageModifier = 1;
         float percentage       = 0.0f;
 
-        void onFirstButtonClick(pugi::xml_node& outNode)
+        void onHealButtonClick(pugi::xml_node& outNode)
         {
-            LOG_INFO("FIRST HUD BUTTON CLICK");
-        }
+            Character* character = State::getController()->getPawn<Character>();
 
-        void onSecondButtonClick(pugi::xml_node& outNode)
-        {
-            LOG_INFO("SECOND HUD BUTTON CLICK");
-        }
-
-        void onProgressBarTick(pugi::xml_node& outNode)
-        {
-            if (percentage >= 100.0f)
+            if (character->isFullHealth())
             {
-                percentageModifier = -1;
+                return;
             }
 
-            if (percentage <= 0.0f)
+            character->setHealth(character->getHealth() + 1.0f);
+        }
+
+        void onTakeDamageButtonClick(pugi::xml_node& outNode)
+        {
+            Character* character = State::getController()->getPawn<Character>();
+
+            if (character->isDead())
             {
-                percentageModifier = 1;
+                return;
             }
 
+            character->setHealth(character->getHealth() - 1.0f);
+        }
+
+        void onHealthBarTick(pugi::xml_node& outNode)
+        {
             if (outNode.attribute("percentage").empty())
             {
                 outNode.append_attribute("percentage");
             }
 
-            outNode.attribute("percentage").set_value(percentage);
-
-            percentage += 0.005f * percentageModifier;
+            outNode.attribute("percentage").set_value(
+                State::getController()->getPawn<Character>()->getHealth()
+            );
         }
     }
 }

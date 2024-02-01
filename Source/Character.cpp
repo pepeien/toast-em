@@ -2,6 +2,10 @@
 
 constexpr float MOVE_STEP = 0.5f;
 
+Character::Character()
+    : m_health(100.0f)
+{}
+
 void Character::getPossesedBy(Chicane::Controller* inController)
 {
     Chicane::Pawn::getPossesedBy(inController);
@@ -33,6 +37,26 @@ void Character::getPossesedBy(Chicane::Controller* inController)
         SDL_SCANCODE_E,
         std::bind(&Character::onRotateYaw, this, false)
     );
+}
+
+bool Character::isDead()
+{
+    return m_health <= 0.0f;
+}
+
+bool Character::isFullHealth()
+{
+    return m_health >= 100.0f;
+}
+
+float Character::getHealth()
+{
+    return m_health;
+}
+
+void Character::setHealth(float inHealth)
+{
+    m_health = inHealth;
 }
 
 void Character::onMoveFrontBack(bool isMovingForwards)

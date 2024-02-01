@@ -2,20 +2,23 @@
 
 #include "UI/Base.hpp"
 
+#include "Character.hpp"
+#include "State.hpp"
+
 namespace UI
 {
     namespace GameplayView
     {
         const std::string VIEW_ID = "gameplay-hud";
 
-        void onFirstButtonClick(pugi::xml_node& outNode);
-        void onSecondButtonClick(pugi::xml_node& outNode);
-        void onProgressBarTick(pugi::xml_node& outNode);
+        void onHealButtonClick(pugi::xml_node& outNode);
+        void onTakeDamageButtonClick(pugi::xml_node& outNode);
+        void onHealthBarTick(pugi::xml_node& outNode);
 
         const ComponentCallbackMap Callbacks = {
-            { "onFirstButtonClick", &onFirstButtonClick },
-            { "onSecondButtonClick", &onSecondButtonClick },
-            { "onProgressBarTick", &onProgressBarTick }
+            { "onHealButtonClick", &onHealButtonClick },
+            { "onTakeDamageButtonClick", &onTakeDamageButtonClick },
+            { "onHealthBarTick", &onHealthBarTick }
         };
     }
 }
