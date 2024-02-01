@@ -7,7 +7,7 @@ file(
     GLOB_RECURSE
     SOURCES
 
-    "${SOURCES_DIR}/*.kerb"
+    "${SOURCES_DIR}/*.box"
     "${SOURCES_DIR}/*.xml"
 )
 
