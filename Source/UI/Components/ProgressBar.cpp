@@ -20,7 +20,7 @@ namespace UI
                     getAttribute(WIDTH_ATTRIBUTE_NAME, outNode).as_float(),
                     getAttribute(HEIGHT_ATTRIBUTE_NAME, outNode).as_float()
                 ),
-                outNode.value()
+                outNode.child_value()
             );
         }
     }
