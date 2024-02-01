@@ -6,6 +6,8 @@ int main(int argc, char *argv[])
     {
         std::unique_ptr<Chicane::Controller> controller = std::make_unique<Chicane::Controller>();
 
+        State::setController(controller.get());
+
         Chicane::Box::Instance skybox = Chicane::Box::read("./Content/Textures/Skybox/Sunset");
 
         std::unique_ptr<Character> character = std::make_unique<Character>();
