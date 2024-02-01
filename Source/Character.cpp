@@ -3,7 +3,8 @@
 constexpr float MOVE_STEP = 0.5f;
 
 Character::Character()
-    : m_health(100.0f)
+    : Chicane::Pawn(),
+    m_health(100.0f)
 {}
 
 void Character::getPossesedBy(Chicane::Controller* inController)
