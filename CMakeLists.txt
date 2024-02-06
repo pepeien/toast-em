@@ -13,7 +13,7 @@ project(${NAME} VERSION 1.0.0)
 ##############  Set Values  #######################
 set(TARGET_NAME "${NAME}")
 set(SOURCES_DIR "${PROJECT_SOURCE_DIR}/Source")
-set(BUILD_DIR   "${CMAKE_SOURCE_DIR}/Bin")
+set(BUILD_DIR   "${CMAKE_SOURCE_DIR}/Bin/${CMAKE_SYSTEM_NAME}")
 
 set(CONTENT_TARGET_NAME "Content")
 set(CONTENT_SOURCE_DIR  "${PROJECT_SOURCE_DIR}/Content")

@@ -80,6 +80,11 @@
         "xlocmon": "cpp",
         "xlocnum": "cpp",
         "xloctime": "cpp",
-        "xtree": "cpp"
+        "xtree": "cpp",
+        "ios": "cpp",
+        "locale": "cpp",
+        "xfacet": "cpp",
+        "xlocbuf": "cpp",
+        "xlocmes": "cpp"
     }
 }
