@@ -1,4 +1,4 @@
-#include "Box.hpp"
+#include "UI/Components/Box.hpp"
 
 namespace UI
 {
@@ -17,8 +17,8 @@ namespace UI
             ImGuiStyle& style = context.Style;
             ImVec2 size = ImGui::CalcItemSize(
                 ImVec2(
-                    getAttribute(WIDTH_ATTRIBUTE_NAME, outNode).as_float(),
-                    getAttribute(HEIGHT_ATTRIBUTE_NAME, outNode).as_float()
+                    getSize(WIDTH_ATTRIBUTE_NAME, outNode),
+                    getSize(HEIGHT_ATTRIBUTE_NAME, outNode)
                 ),
                 ImGui::CalcItemWidth(),
                 context.FontSize + style.FramePadding.y * 2.0f

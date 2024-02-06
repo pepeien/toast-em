@@ -19,7 +19,6 @@ namespace UI
 
     // Value attributes
     const std::string ID_ATTRIBUTE_NAME     = "id";
-    const std::string TITLE_ATTRIBUTE_NAME  = "title";
     const std::string WIDTH_ATTRIBUTE_NAME  = "width";
     const std::string HEIGHT_ATTRIBUTE_NAME = "height";
 
@@ -31,7 +30,18 @@ namespace UI
         ComponentCallbackMap callbacks;
     };
 
+    bool endsWith(const std::string& inTarget, const std::string& inEnding);
+
     std::string getTag(const pugi::xml_node& outNode);
+
+    float getSizeFromPixel(const pugi::xml_attribute& inAttribute);
+    float getSizeFromViewportHeight(const pugi::xml_attribute& inAttribute);
+    float getSizeFromViewportWidth(const pugi::xml_attribute& inAttribute);
+    float getSize(
+        const std::string& inAttributeName,
+        const pugi::xml_node& inNode
+    );
+
     pugi::xml_attribute getAttribute(
         const std::string& inName,
         const pugi::xml_node& outNode

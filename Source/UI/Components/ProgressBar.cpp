@@ -1,4 +1,4 @@
-#include "ProgressBar.hpp"
+#include "UI/Components/ProgressBar.hpp"
 
 #include "UI/Maps.hpp"
 
@@ -17,8 +17,8 @@ namespace UI
             ImGui::ProgressBar(
                 percentage,
                 ImVec2(
-                    getAttribute(WIDTH_ATTRIBUTE_NAME, outNode).as_float(),
-                    getAttribute(HEIGHT_ATTRIBUTE_NAME, outNode).as_float()
+                    getSize(WIDTH_ATTRIBUTE_NAME, outNode),
+                    getSize(HEIGHT_ATTRIBUTE_NAME, outNode)
                 ),
                 outNode.child_value()
             );

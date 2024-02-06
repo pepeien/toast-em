@@ -1,6 +1,8 @@
-#include "Layer.hpp"
+#include "UI/Layer.hpp"
 
-#include "Components/View.hpp"
+#include "UI/Components/View.hpp"
+
+#include "State.hpp"
 
 namespace UI
 {
@@ -30,12 +32,33 @@ namespace UI
         ImGui_ImplSDL2_InitForVulkan(m_window->instance);
     }
 
-    void Layer::init()
+    Layer::~Layer()
+    {
+        m_renderer->m_logicalDevice.waitIdle();
+
+        ImGui_ImplVulkan_Shutdown();
+        ImGui_ImplSDL2_Shutdown();
+        ImGui::DestroyContext();
+
+        m_renderer->m_logicalDevice.destroyRenderPass(m_renderPass);
+        m_renderer->m_logicalDevice.destroyDescriptorPool(m_descriptorPool);
+    }
+
+    void Layer::build()
     {
         initDescriptorPool();
         initRenderpass();
         initFramebuffers();
         initImgui();
+
+        State::setResolution(m_window->getResolution());
+    }
+
+    void Layer::rebuild()
+    {
+        initFramebuffers();
+
+        State::setResolution(m_window->getResolution());
     }
 
     void Layer::onEvent(const SDL_Event& inEvent)
@@ -90,18 +113,8 @@ namespace UI
     		ImGui::UpdatePlatformWindows();
     		ImGui::RenderPlatformWindowsDefault();
     	}
-    }
 
-    void Layer::destroy()
-    {
-        m_renderer->m_logicalDevice.waitIdle();
-
-        ImGui_ImplVulkan_Shutdown();
-        ImGui_ImplSDL2_Shutdown();
-        ImGui::DestroyContext();
-
-        m_renderer->m_logicalDevice.destroyRenderPass(m_renderPass);
-        m_renderer->m_logicalDevice.destroyDescriptorPool(m_descriptorPool);
+        State::setStats(m_window->getStats());
     }
 
     void Layer::initDescriptorPool()

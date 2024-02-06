@@ -11,14 +11,12 @@ namespace UI
     {
         const std::string VIEW_ID = "gameplay-hud";
 
-        void onHealButtonClick(pugi::xml_node& outNode);
-        void onTakeDamageButtonClick(pugi::xml_node& outNode);
-        void onHealthBarTick(pugi::xml_node& outNode);
+        void onFPSCounterTick(pugi::xml_node& outNode);
+        void onFrametimeTick(pugi::xml_node& outNode);
 
         const ComponentCallbackMap Callbacks = {
-            { "onHealButtonClick", &onHealButtonClick },
-            { "onTakeDamageButtonClick", &onTakeDamageButtonClick },
-            { "onHealthBarTick", &onHealthBarTick }
+            { "onFPSCounterTick", &onFPSCounterTick },
+            { "onFrametimeTick", &onFrametimeTick }
         };
     }
 }

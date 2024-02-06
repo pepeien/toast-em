@@ -1,4 +1,4 @@
-#include "View.hpp"
+#include "UI/Components/View.hpp"
 
 #include "UI/Maps.hpp"
 
@@ -53,12 +53,22 @@ namespace UI
             setActiveView(activeView);
 
             ImGui::Begin(
-                getAttribute(TITLE_ATTRIBUTE_NAME ,outNode).as_string(),
+                getAttribute(ID_ATTRIBUTE_NAME ,outNode).as_string(),
                 nullptr,
                 viewFlags
             );
-                ImGui::SetWindowSize(ImVec2(inResolution.x, inResolution.y));
-                ImGui::SetWindowPos(ImVec2(inPosition.x, inPosition.y));
+                ImGui::SetWindowSize(
+                    ImVec2(
+                        static_cast<float>(inResolution.x),
+                        static_cast<float>(inResolution.y)
+                    )
+                );
+                ImGui::SetWindowPos(
+                    ImVec2(
+                        static_cast<float>(inPosition.x),
+                        static_cast<float>(inPosition.y)
+                    )
+                );
 
                 compileChildren(outNode);
             ImGui::End();

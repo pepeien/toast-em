@@ -11,6 +11,9 @@ public:
 public:
     void getPossesedBy(Chicane::Controller* inController) override;
 
+    uint32_t getAmmo();
+    void setAmmo(uint32_t inAmmo);
+
     bool isDead();
     bool isFullHealth();
     float getHealth();
@@ -22,5 +25,6 @@ private:
     void onRotateYaw(bool isMovingRight);
 
 private:
+    uint32_t m_ammo;
     float m_health;
 };

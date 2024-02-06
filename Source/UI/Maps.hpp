@@ -2,13 +2,13 @@
 
 #include "UI/Base.hpp"
 
-#include "Components/Box.hpp"
-#include "Components/Button.hpp"
-#include "Components/List.hpp"
-#include "Components/ProgressBar.hpp"
-#include "Components/Text.hpp"
+#include "UI/Components/Box.hpp"
+#include "UI/Components/Button.hpp"
+#include "UI/Components/List.hpp"
+#include "UI/Components/ProgressBar.hpp"
+#include "UI/Components/Text.hpp"
 
-#include "Views/Gameplay.hpp"
+#include "UI/Views/Gameplay.hpp"
 
 namespace UI
 {

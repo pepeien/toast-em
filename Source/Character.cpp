@@ -4,6 +4,7 @@ constexpr float MOVE_STEP = 0.5f;
 
 Character::Character()
     : Chicane::Pawn(),
+    m_ammo(200),
     m_health(100.0f)
 {}
 
@@ -38,6 +39,16 @@ void Character::getPossesedBy(Chicane::Controller* inController)
         SDL_SCANCODE_E,
         std::bind(&Character::onRotateYaw, this, false)
     );
+}
+
+uint32_t Character::getAmmo()
+{
+    return m_ammo;
+}
+
+void Character::setAmmo(uint32_t inAmmo)
+{
+    m_ammo = inAmmo;
 }
 
 bool Character::isDead()

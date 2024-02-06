@@ -1,24 +1,27 @@
-<View id="gameplay-hud" title="Gameplay HUD">
-    <Box width="100" height="100" />
-    <List title="Status" direction="column" height="65">
-        <ProgressBar
-            width="200"
-            height="25"
-            percentage="100"
-            onTick="onHealthBarTick"
+<View id="gameplay-hud">
+    <List
+        id="stats"
+        direction="row"
+        width="100vh"
+        height="10vh"
+    >
+        <List
+            id="fps"
+            direction="row"
+            width="8vh"
+            height="3vh"
         >
-            Health
-        </ProgressBar>
-        <ProgressBar
-            width="170"
-            height="25"
-            percentage="100"
+            <Text>FPS:</Text>
+            <Text onTick="onFPSCounterTick">0</Text>
+        </List>
+        <List
+            id="frametime"
+            direction="row"
+            width="12vh"
+            height="3vh"
         >
-            Mana
-        </ProgressBar>
-    </List>
-    <List title="Button List" direction="row">
-        <Button onClick="onTakeDamageButtonClick">Take Damage</Button>
-        <Button onClick="onHealButtonClick">Heal</Button>
+            <Text>Frametime:</Text>
+            <Text onTick="onFrametimeTick">0</Text>
+        </List>
     </List>
 </View>

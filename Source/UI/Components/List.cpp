@@ -1,4 +1,4 @@
-#include "List.hpp"
+#include "UI/Components/List.hpp"
 
 namespace UI
 {
@@ -30,11 +30,11 @@ namespace UI
                 throw std::runtime_error("Component is not a " + TAG_ID);
             }
 
-            std::string title = getAttribute(TITLE_ATTRIBUTE_NAME, inNode).as_string();
+            std::string title = getAttribute(ID_ATTRIBUTE_NAME, inNode).as_string();
 
             if (title.empty())
             {
-                throw std::runtime_error(TAG_ID + " components must have a " + TITLE_ATTRIBUTE_NAME + " attribute");
+                throw std::runtime_error(TAG_ID + " components must have a " + ID_ATTRIBUTE_NAME + " attribute");
             }
         }
 
@@ -45,10 +45,10 @@ namespace UI
             Direction direction = getDirection(outNode);
 
             ImGui::BeginChild(
-                getAttribute(TITLE_ATTRIBUTE_NAME, outNode).as_string(),
+                getAttribute(ID_ATTRIBUTE_NAME, outNode).as_string(),
                 ImVec2(
-                    getAttribute(WIDTH_ATTRIBUTE_NAME, outNode).as_float(),
-                    getAttribute(HEIGHT_ATTRIBUTE_NAME, outNode).as_float()
+                    getSize(WIDTH_ATTRIBUTE_NAME, outNode),
+                    getSize(HEIGHT_ATTRIBUTE_NAME, outNode)
                 )
             );
                 if (!outNode.children().empty())

@@ -1,4 +1,4 @@
-#include "Base.hpp"
+#include "UI/Base.hpp"
 
 #include "UI/Maps.hpp"
 
@@ -6,9 +6,101 @@ namespace UI
 {
     View m_activeView = {};
 
+    bool endsWith(const std::string& inTarget, const std::string& inEnding)
+    {
+        return std::string(inTarget.end() - inEnding.size(), inTarget.end()).compare(inEnding) == 0;
+    }
+
     std::string getTag(const pugi::xml_node& inNode)
     {
         return inNode.name();
+    }
+
+    float getSizeFromPixel(const pugi::xml_attribute& inAttribute)
+    {
+        if (inAttribute.empty())
+        {
+            return 0.0f;
+        }
+
+        std::string rawValue = inAttribute.as_string();
+
+        if (!endsWith(rawValue, "px"))
+        {
+            return 0.0f;
+        }
+
+        return std::stof(std::string(rawValue.begin(), rawValue.end() - 2));
+    }
+
+    float getSizeFromViewportHeight(const pugi::xml_attribute& inAttribute)
+    {
+        if (inAttribute.empty())
+        {
+            return 0.0f;
+        }
+
+        std::string rawValue = inAttribute.as_string();
+
+        if (!endsWith(rawValue, "vh"))
+        {
+            return 0.0f;
+        }
+
+        float valueInVh = std::stof(std::string(rawValue.begin(), rawValue.end() - 2)) / 100;
+
+        return State::getResolution().y * valueInVh;
+    }
+
+    float getSizeFromViewportWidth(const pugi::xml_attribute& inAttribute)
+    {
+        if (inAttribute.empty())
+        {
+            return 0.0f;
+        }
+
+        std::string rawValue = inAttribute.as_string();
+
+        if (!endsWith(rawValue, "vw"))
+        {
+            return 0.0f;
+        }
+
+        float valueInVw = std::stof(std::string(rawValue.begin(), rawValue.end() - 2)) / 100;
+
+        return State::getResolution().x * valueInVw;
+    }
+
+    float getSize(
+        const std::string& inAttributeName,
+        const pugi::xml_node& inNode
+    )
+    {
+        pugi::xml_attribute attributeValue = getAttribute(inAttributeName, inNode);
+
+        if (attributeValue.empty())
+        {
+            return 0.0f;
+        }
+
+        std::string rawValue = attributeValue.as_string();
+
+        if (endsWith(rawValue, "px"))
+        {
+            return getSizeFromPixel(attributeValue);
+        }
+
+        if (endsWith(rawValue, "vh"))
+        {
+            return getSizeFromViewportHeight(attributeValue);
+        }
+
+        if (endsWith(rawValue, "vw"))
+        {
+            return getSizeFromViewportWidth(attributeValue);
+        }
+
+        return 0.0f;
     }
 
     pugi::xml_attribute getAttribute(

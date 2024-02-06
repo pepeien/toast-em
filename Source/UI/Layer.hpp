@@ -11,17 +11,20 @@ namespace UI
     {
     public:
         Layer(Chicane::Window* inWindow);
+        ~Layer();
 
     public:
-        void init() override;
+        void build() override;
+        void rebuild() override;
+
         void onEvent(const SDL_Event& inEvent) override;
+
         void setup(Chicane::Frame::Instance& outFrame) override;
         void render(
             Chicane::Frame::Instance& outFrame,
             const vk::CommandBuffer& inCommandBuffer,
             const vk::Extent2D& inSwapChainExtent
         ) override;
-        void destroy() override;
 
     private:
         void initDescriptorPool();
