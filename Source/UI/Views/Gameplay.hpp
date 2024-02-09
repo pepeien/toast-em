@@ -1,9 +1,9 @@
 #pragma once
 
-#include "UI/Base.hpp"
+#include "Runtime/Game/State.hpp"
+#include "Runtime/Grid/Essential.hpp"
 
 #include "Character.hpp"
-#include "State.hpp"
 
 namespace UI
 {
@@ -14,7 +14,7 @@ namespace UI
         void onFPSCounterTick(pugi::xml_node& outNode);
         void onFrametimeTick(pugi::xml_node& outNode);
 
-        const ComponentCallbackMap Callbacks = {
+        const Chicane::Grid::ComponentCallbackMap Callbacks = {
             { "onFPSCounterTick", &onFPSCounterTick },
             { "onFrametimeTick", &onFrametimeTick }
         };

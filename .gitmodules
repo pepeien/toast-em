@@ -1,7 +1,13 @@
 [submodule "Vendor/imgui"]
-	path = Vendor/imgui
+	path = Sources/Vendor/imgui
 	url = https://github.com/ocornut/imgui.git
 	branch = docking
 [submodule "Vendor/pugixml"]
-	path = Vendor/pugixml
+	path = Sources/Vendor/pugixml
 	url = https://github.com/zeux/pugixml.git
+[submodule "Vendor/chicane"]
+	path = Vendor/chicane
+	url = https://github.com/pepeien/chicane.git
+[submodule "Vendor/Chicane"]
+	path = Vendor/Chicane
+	url = https://github.com/pepeien/chicane.git

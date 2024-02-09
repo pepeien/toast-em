@@ -11,13 +11,13 @@ namespace UI
             outNode
             .first_child()
             .set_value(
-                std::to_string(State::getStats().framerate).c_str()
+                std::to_string(Chicane::State::getStats().framerate).c_str()
             );
         }
 
         void onFrametimeTick(pugi::xml_node& outNode)
         {
-            std::string frametime = std::to_string(State::getStats().time);
+            std::string frametime = std::to_string(Chicane::State::getStats().time);
 
             outNode
             .first_child()

@@ -17,7 +17,7 @@
         <List
             id="frametime"
             direction="row"
-            width="12vh"
+            width="15vh"
             height="3vh"
         >
             <Text>Frametime:</Text>

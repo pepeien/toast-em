@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
         std::unique_ptr<Chicane::Level> level = std::make_unique<Chicane::Level>();
         std::unique_ptr<Chicane::Controller> controller = std::make_unique<Chicane::Controller>();
 
-        State::setController(controller.get());
+        Chicane::State::setController(controller.get());
 
         Chicane::Box::Instance skybox = Chicane::Box::read("./Content/Textures/SKY_Grid");
         level->setSkybox(skybox);
@@ -32,7 +32,6 @@ int main(int argc, char *argv[])
             controller.get(),
             level.get()
         );
-        window->addLayer(new UI::Layer(window.get()));
         window->run();
     }
     catch (const std::exception& e)
